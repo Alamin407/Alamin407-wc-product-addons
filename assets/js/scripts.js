@@ -1,3 +1,4 @@
+// Admin Js
 jQuery(document).ready(function ($) {
   // Add new addon field
   $("#add-addon-button").on("click", function () {
