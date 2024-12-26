@@ -18,14 +18,13 @@ define( 'WC_ADDON_OPTIONS_URL', plugin_dir_url( __FILE__ ) );
 
 // Include the main class file
 require_once WC_ADDON_OPTIONS_PATH . 'includes/class-wc-product-addon-activate.php';
+
 require_once WC_ADDON_OPTIONS_PATH . 'includes/class-wc-product-addon-deactivate.php';
 
 // Register activation and deactivation hooks.
 register_activation_hook( __FILE__, [ 'WC_Product_Addon_Activate', 'activate' ] );
 
 register_deactivation_hook( __FILE__, [ 'WC_Product_Addon_Deactivate', 'deactivate' ] );
-
-
 
 require_once WC_ADDON_OPTIONS_PATH . 'includes/class-wc-product-addon-assets.php';
 // Include the enqueue class file
