@@ -86,6 +86,7 @@ class WC_Product_Addon_Options {
 
     public function save_custom_fields( $post_id ) {
         $addon_section_title = isset( $_POST['addon_section_title'] ) ? sanitize_text_field( $_POST['addon_section_title'] ) : '';
+        
         update_post_meta( $post_id, '_addon_section_title', $addon_section_title );
     
         $addon_titles = isset( $_POST['addon_titles'] ) ? array_map( 'sanitize_text_field', $_POST['addon_titles'] ) : [];
