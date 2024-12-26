@@ -1,0 +1,25 @@
+.addon-field-row {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+.addon-field-row .form-field {
+  margin: 5px 0;
+}
+
+.remove-addon-button {
+  margin-top: 10px;
+  background: #dc3232;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.remove-addon-button:hover {
+  background: #a40000;
+}
