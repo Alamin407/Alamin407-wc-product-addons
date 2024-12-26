@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Product Addon Options
  * Description: Adds extra addon options to WooCommerce products with prices displayed and calculated dynamically.
- * Version: 1.2.0
+ * Version: 1.1.0
  * Author: MD AL AMIN ISLAM
  * * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
