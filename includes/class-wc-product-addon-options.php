@@ -147,24 +147,34 @@ class WC_Product_Addon_Options {
     }
 
     public function update_cart_item_subtotal( $subtotal, $cart_item, $cart_item_key ) {
+        $line_total = isset( $cart_item['line_total'] ) ? $cart_item['line_total'] : 0;
+    
+        // Include the addon price if it exists
         if ( isset( $cart_item['product_addon_price'] ) ) {
-            $subtotal = $cart_item['line_total'] + $cart_item['product_addon_price'];
+            $line_total += $cart_item['product_addon_price'];
         }
-
-        return wc_price( $subtotal );
+    
+        return wc_price( $line_total );
     }
+    
 
     public function adjust_cart_totals( $cart ) {
         if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
             return;
         }
-
-        foreach ( $cart->get_cart() as $cart_item ) {
+    
+        foreach ( $cart->get_cart() as $cart_item_key => $cart_item ) {
             if ( isset( $cart_item['product_addon_price'] ) ) {
-                $cart_item['data']->set_price( $cart_item['data']->get_price() + $cart_item['product_addon_price'] );
+                $addon_price = floatval( $cart_item['product_addon_price'] );
+                $product_price = floatval( $cart_item['data']->get_regular_price() );
+    
+                // Set the price to product price + addon price
+                $cart_item['data']->set_price( $product_price + $addon_price );
             }
         }
     }
+    
+    
 
     public function add_item_meta_to_order( $item, $cart_item_key, $values, $order ) {
         if ( isset( $values['product_addon_price'] ) ) {
