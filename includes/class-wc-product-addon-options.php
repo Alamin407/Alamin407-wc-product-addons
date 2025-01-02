@@ -156,7 +156,6 @@ class WC_Product_Addon_Options {
     
         return wc_price( $line_total );
     }
-    
 
     public function adjust_cart_totals( $cart ) {
         if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
@@ -166,15 +165,16 @@ class WC_Product_Addon_Options {
         foreach ( $cart->get_cart() as $cart_item_key => $cart_item ) {
             if ( isset( $cart_item['product_addon_price'] ) ) {
                 $addon_price = floatval( $cart_item['product_addon_price'] );
-                $product_price = floatval( $cart_item['data']->get_regular_price() );
+                $product = $cart_item['data'];
     
-                // Set the price to product price + addon price
-                $cart_item['data']->set_price( $product_price + $addon_price );
+                // Use the sale price if available, otherwise use the regular price
+                $product_price = $product->is_on_sale() ? floatval( $product->get_sale_price() ) : floatval( $product->get_regular_price() );
+    
+                // Set the cart item's price to sale price + addon price
+                $product->set_price( $product_price + $addon_price );
             }
         }
     }
-    
-    
 
     public function add_item_meta_to_order( $item, $cart_item_key, $values, $order ) {
         if ( isset( $values['product_addon_price'] ) ) {
